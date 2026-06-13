@@ -1,0 +1,6 @@
+{
+  "name": "Beaux Box",
+  "description": "High-end, sustainable custom wooden gift boxes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
