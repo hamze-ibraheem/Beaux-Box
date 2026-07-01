@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { motion } from 'motion/react';
 import { 
   Gift, 
@@ -11,7 +12,14 @@ import {
   Facebook
 } from 'lucide-react';
 
-const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => (
+interface FadeInProps {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  key?: React.Key;
+}
+
+const FadeIn = ({ children, delay = 0, className = "" }: FadeInProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +63,69 @@ export default function App() {
 
       {/* 2. Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-br from-[#121212] to-[#0a0a0a] border-b border-[#2a2a2a]">
-        <div className="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#1a1a1a] via-[#0f0f0f] to-[#0f0f0f]"></div>
+        <div 
+          className="absolute inset-0 z-0 opacity-20 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+          style={{ backgroundImage: "linear-gradient(to bottom, rgba(15, 15, 15, 0.5), rgba(15, 15, 15, 0.95)), url('https://images.unsplash.com/photo-1605263139357-df31fa299682?q=80&w=1600')" }}
+        ></div>
+
+        {/* Floating AI-style Luxury Images matching User's Red "X" areas */}
+        
+        {/* X Mark 1: Far Left (Middle-Height) - Luxury Glass Apothecary Bottles */}
+        <motion.div 
+          className="absolute left-6 lg:left-12 top-[32%] hidden md:block w-36 lg:w-52 aspect-[3/4] border border-[#2a2a2a] p-2.5 bg-[#121212] shadow-2xl z-20"
+          animate={{ y: [0, -15, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="relative w-full h-full overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?q=80&w=600" 
+              alt="Premium natural apothecary elixirs" 
+              className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-700"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute bottom-2 left-2 right-2 bg-[#0f0f0f]/90 border border-[#2a2a2a] py-1 px-2 text-[8px] uppercase tracking-widest text-[#b89b72] font-semibold">
+              All-Natural Elixirs
+            </div>
+          </div>
+        </motion.div>
+
+        {/* X Mark 2: Center-Top (Just above/left of heading) - Lavender botanical details */}
+        <motion.div 
+          className="absolute left-[22%] top-[14%] hidden lg:block w-24 h-24 rounded-full border border-[#b89b72]/30 p-1 bg-[#121212] z-20 overflow-hidden"
+          animate={{ y: [0, 8, 0], rotate: [0, 5, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="w-full h-full rounded-full overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?q=80&w=300" 
+              alt="Botanicals" 
+              className="w-full h-full object-cover grayscale opacity-85"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+        </motion.div>
+
+
+
+        {/* X Mark 4: Far Right (Middle-to-low height) - Beautiful Premium Gift Box Packaging */}
+        <motion.div 
+          className="absolute right-6 lg:right-14 top-[35%] hidden md:block w-40 lg:w-60 aspect-[4/5] border border-[#2a2a2a] p-2.5 bg-[#121212] shadow-2xl z-20"
+          animate={{ y: [0, -18, 0] }}
+          transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        >
+          <div className="relative w-full h-full overflow-hidden">
+            <img 
+              src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=600" 
+              alt="Signature wooden keepsake gift box" 
+              className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 transition-all duration-700"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute bottom-2 left-2 right-2 bg-[#0f0f0f]/90 border border-[#2a2a2a] py-1.5 px-2 text-[8px] uppercase tracking-widest text-[#b89b72] font-semibold">
+              Signature Wooden Keepsake
+            </div>
+          </div>
+        </motion.div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -67,10 +137,41 @@ export default function App() {
             <h1 className="font-serif text-5xl md:text-7xl text-white leading-[1.1] mb-8">
               The Art of Thoughtful,<br/> <span className="italic font-light text-[#b89b72]">Sustainable</span> Gifting.
             </h1>
-            <p className="text-lg md:text-xl text-[#aaa] mb-10 leading-relaxed font-light">
+            <p className="text-lg md:text-xl text-[#aaa] mb-6 leading-relaxed font-light">
               Curated, all-natural products beautifully presented in reusable wooden keepsake boxes. 
               Personalized concierge service for every occasion, big or small.
             </p>
+
+            {/* Central Big Beautiful Premium Showcase Image Container with Overlays */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="relative w-full max-w-3xl mx-auto my-12 aspect-[16/9] border border-[#b89b72]/40 p-2 lg:p-3 bg-[#121212] shadow-[0_0_50px_rgba(184,155,114,0.1)] overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f0f] via-transparent to-transparent z-10 opacity-70"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1600" 
+                alt="Beaux Box Premium Handcrafted Wooden Keepsake Collection" 
+                className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                referrerPolicy="no-referrer"
+              />
+              {/* Inner accent border */}
+              <div className="absolute inset-0 border border-[#b89b72]/10 m-2 lg:m-3 pointer-events-none z-20"></div>
+              
+              {/* Luxury Text and Interactive Overlays */}
+              <div className="absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-left">
+                <div>
+                  <span className="text-[#b89b72] text-[10px] uppercase tracking-[0.2em] font-bold block mb-1">Signature Craftsmanship</span>
+                  <h3 className="font-serif italic text-2xl text-white font-light">The Atelier Curation Box</h3>
+                </div>
+                <div className="flex items-center gap-2 text-[9px] uppercase tracking-widest text-[#b89b72] border-b border-[#b89b72]/40 pb-1 font-bold group-hover:border-white group-hover:text-white transition-all cursor-pointer">
+                  <span>View Interactive Details</span>
+                  <ArrowRight className="w-3 h-3" />
+                </div>
+              </div>
+            </motion.div>
+
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button className="bg-[#b89b72] text-[#0f0f0f] px-8 py-4 text-xs uppercase tracking-widest font-bold hover:bg-white transition-all flex items-center justify-center gap-2">
                 Book a Zoom Consultation
@@ -178,11 +279,20 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <FadeIn>
-              <div className="aspect-[4/5] bg-[#131313] border border-[#2a2a2a] relative flex items-center justify-center overflow-hidden">
-                {/* Minimalist graceful placeholder indicating where an image would be */}
-                <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1607004468148-52086eefa0bd?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
-                <div className="z-10 text-center p-8 bg-[#0f0f0f]/80 backdrop-blur-sm border border-[#2a2a2a]">
-                   <p className="font-serif italic text-2xl text-[#b89b72]">"Every box tells a story."</p>
+              <div className="aspect-[4/5] bg-[#131313] border border-[#2a2a2a] relative flex items-center justify-center overflow-hidden group">
+                {/* High-end luxury curation photography */}
+                <img 
+                  src="https://images.unsplash.com/photo-1608755728617-aefab37d2edd?q=80&w=1200" 
+                  alt="Beaux Box Custom Luxurious Wooden Gift Box Curation" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/90 via-[#0a0a0a]/30 to-transparent z-10 pointer-events-none"></div>
+                
+                {/* Beautiful custom floating frame containing the brand quote */}
+                <div className="z-10 text-center p-8 bg-[#0f0f0f]/90 backdrop-blur-sm border border-[#b89b72]/30 max-w-xs mx-4 transition-colors duration-500 group-hover:border-[#b89b72]">
+                   <p className="font-serif italic text-2xl text-[#b89b72] mb-2">"Every box tells a story."</p>
+                   <span className="text-[9px] uppercase tracking-[0.25em] text-[#888] block font-bold">Handcrafted Keepsakes</span>
                 </div>
               </div>
             </FadeIn>
